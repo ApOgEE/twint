@@ -243,6 +243,15 @@ def tweets(conn, Tweet, config):
     try:
         time_ms = round(time.time()*1000)
         cursor = conn.cursor()
+
+        mentions = []
+
+        for m in Tweet.mentions:
+            if type(m) is dict:
+                mentions.append(m['screen_name'])
+            else:
+                mentions.append(str(m))
+
         entry = (Tweet.id,
                     Tweet.id_str,
                     Tweet.tweet,
@@ -261,7 +270,7 @@ def tweets(conn, Tweet, config):
                     Tweet.username,
                     Tweet.name,
                     Tweet.link,
-                    ",".join(Tweet.mentions),
+                    ",".join(mentions),
                     ",".join(Tweet.hashtags),
                     ",".join(Tweet.cashtags),
                     ",".join(Tweet.urls),
