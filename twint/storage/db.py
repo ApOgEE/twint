@@ -244,6 +244,11 @@ def tweets(conn, Tweet, config):
         time_ms = round(time.time()*1000)
         cursor = conn.cursor()
 
+        if type(Tweet.place) is dict:
+            t_place = ",".join(str(v) for v in Tweet.place['coordinates'])
+        else:
+            t_place = ""
+
         mentions = []
 
         for m in Tweet.mentions:
@@ -261,7 +266,7 @@ def tweets(conn, Tweet, config):
                     Tweet.datestamp,
                     Tweet.timestamp,
                     Tweet.timezone,
-                    Tweet.place,
+                    t_place,
                     Tweet.replies_count,
                     Tweet.likes_count,
                     Tweet.retweets_count,
