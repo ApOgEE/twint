@@ -6,8 +6,8 @@ Please use this template!
 
 >Make sure you've checked the following:
 
-- [] Python version is 3.6;
-- [] Updated Twint with `pip3 install --user --upgrade -e git+https://github.com/twintproject/twint.git@origin/master#egg=twint`;
+- [] Python version is 3.8;
+- [] Updated Twint with `pip3 install --user --upgrade -e git+https://github.com/apogee/twint.git@apogee-fix#egg=twint`;
 - [] I have searched the issues and there are no duplicates of this issue/question/request.
 
 ### Command Ran
