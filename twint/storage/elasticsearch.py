@@ -65,6 +65,15 @@ def createIndex(config, instance, **scope):
                         "location": {"type": "keyword"},
                         "tweet": {"type": "text"},
                         "lang": {"type": "keyword"},
+                        "language": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        },                        
                         "hashtags": {"type": "keyword", "normalizer": "hashtag_normalizer"},
                         "cashtags": {"type": "keyword", "normalizer": "hashtag_normalizer"},
                         "user_id_str": {"type": "keyword"},
@@ -88,13 +97,53 @@ def createIndex(config, instance, **scope):
                         "geo_tweet": {"type": "geo_point"},
                         "photos": {"type": "text"},
                         "user_rt_id": {"type": "keyword"},
-                        "mentions": {"type": "keyword", "normalizer": "hashtag_normalizer"},
+                        "mentions": {
+                            "type": "nested",
+                            "properties": {
+                                "id": {
+                                    "type": "long"
+                                },
+                                "name": {
+                                    "type": "text"
+                                },
+                                "screen_name": {
+                                    "type": "text"
+                                }
+                            }
+                        },
                         "source": {"type": "keyword"},
                         "user_rt": {"type": "keyword"},
                         "retweet_id": {"type": "keyword"},
                         "reply_to": {
                             "type": "nested",
                             "properties": {
+                                "id": {
+                                    "type": "text",
+                                    "fields": {
+                                        "keyword": {
+                                            "type": "keyword",
+                                            "ignore_above": 256
+                                        }
+                                    }
+                                },
+                                "name": {
+                                    "type": "text",
+                                    "fields": {
+                                        "keyword": {
+                                            "type": "keyword",
+                                            "ignore_above": 256
+                                        }
+                                    }
+                                },
+                                "screen_name": {
+                                    "type": "text",
+                                    "fields": {
+                                        "keyword": {
+                                            "type": "keyword",
+                                            "ignore_above": 256
+                                        }
+                                    }
+                                },
                                 "user_id": {"type": "keyword"},
                                 "username": {"type": "keyword"}
                             }
